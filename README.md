@@ -62,34 +62,12 @@ require("arrakis").setup({
 })
 ```
 
-## Ghostty
-
-```sh
-cp extras/ghostty/arrakis ~/.config/ghostty/themes/arrakis
-```
-
-Then add this to your Ghostty config:
-
-```
-theme = arrakis
-```
-
-The config file is `~/.config/ghostty/config` on Linux and BSD. **On macOS
-it is `~/Library/Application Support/com.mitchellh.ghostty/config`** — a
-`~/.config/ghostty/config` you create there is ignored, so editing it looks
-like the theme silently failing. The `themes/` directory above is read on
-both platforms.
-
-Reload with `⌘⇧,` (macOS) or `ctrl+shift+,`; Ghostty does not pick up a
-theme change in already-open windows without it.
-
-The terminal's ANSI 16 and Neovim's `terminal_color_*` come from the same
-values, so `:terminal` and a bare shell look identical.
-
 ## Palette
 
-Both sides are maintained by hand. This table is the reference for
-reconciling them; `tests/parity.lua` fails if they drift.
+The Lua palette and the Ghostty theme at
+[`extras/ghostty/arrakis`](extras/ghostty/arrakis) are maintained by hand.
+This table is the reference for reconciling them; `tests/parity.lua` fails
+if they drift.
 
 | role | hex | | role | hex |
 | --- | --- | --- | --- | --- |
@@ -111,8 +89,12 @@ chrome sit deliberately below it. The thresholds are asserted by
 
 ## Plugins
 
-Themed: [oil.nvim], [telescope.nvim], [blink.cmp], [trouble.nvim],
-[toggleterm.nvim], [mini.nvim], [gitsigns.nvim].
+Styled explicitly, not by inheritance. Telescope and oil define no
+highlight groups of their own, so without this their pickers and columns
+fall back to unstyled `Normal`.
+
+[oil.nvim] · [telescope.nvim] · [blink.cmp] · [trouble.nvim] ·
+[toggleterm.nvim] · [mini.nvim] · [gitsigns.nvim]
 
 [oil.nvim]: https://github.com/stevearc/oil.nvim
 [telescope.nvim]: https://github.com/nvim-telescope/telescope.nvim
