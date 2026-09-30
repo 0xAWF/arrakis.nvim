@@ -6,7 +6,6 @@ return function(t)
   require("arrakis").setup({})
   vim.cmd.colorscheme("arrakis")
 
-  -- These are the groups a user would notice missing first in each plugin.
   local groups = {
     -- oil.nvim
     "OilDir",

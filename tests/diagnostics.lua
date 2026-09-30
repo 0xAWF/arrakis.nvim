@@ -38,7 +38,6 @@ return function(t)
     )
   end
 
-  -- Underlines must be undercurl in the matching accent, carried on `sp`.
   local underlines = {
     DiagnosticUnderlineError = p.blood,
     DiagnosticUnderlineWarn = p.spice,

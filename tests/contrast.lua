@@ -25,8 +25,8 @@ local function ratio(a, b)
   return (la + 0.05) / (lb + 0.05)
 end
 
--- Thresholds from the spec. Comments and chrome sit below the text bar by
--- design, so they get their own lower bars rather than being exempted.
+-- Comments and chrome sit below the text bar by design, so they get their
+-- own lower bars rather than being exempted.
 local thresholds = {
   fg_bright = 7,
   fg = 7,
@@ -48,7 +48,6 @@ local thresholds = {
 return function(t)
   local p = require("arrakis.palette")
 
-  -- Every value in the palette must be a well-formed hex string.
   for name, value in pairs(p) do
     if name ~= "ansi" then
       t.check(

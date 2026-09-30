@@ -16,7 +16,6 @@ return function(t)
   arrakis.setup({})
   vim.cmd.colorscheme("arrakis")
 
-  -- The restraint rule, asserted group by group.
   local expected = {
     ["Comment"] = p.muted,
     ["@comment"] = p.muted,
@@ -87,7 +86,6 @@ return function(t)
     )
   end
 
-  -- italic_comments, on by default and switchable.
   t.check("comments italic by default", hl("Comment").italic == true, "not italic")
 
   arrakis.setup({ italic_comments = false })
