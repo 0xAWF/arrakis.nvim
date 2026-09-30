@@ -62,7 +62,7 @@ appears there exactly once.
 | `scrub` | `#8aa66b` | hints, git add |
 | `water` | `#5fa89b` | ANSI cyan |
 | `melange` | `#b07ea8` | ANSI magenta |
-| `blood` | `#d1554a` | errors |
+| `blood` | `#d55d4f` | errors |
 
 `ember` is editor-only; it has no ANSI slot, since ANSI has no orange.
 
@@ -72,7 +72,7 @@ Hardcoded, not blended at runtime. Each is 45% accent over `bg`.
 
 | name | hex |
 | --- | --- |
-| `err_dim` | `#6c3229` |
+| `err_dim` | `#6e352c` |
 | `warn_dim` | `#6f572f` |
 | `info_dim` | `#325861` |
 | `hint_dim` | `#4c5738` |
@@ -86,7 +86,7 @@ indistinguishable.
 | # | hex | | # | hex |
 | --- | --- | --- | --- | --- |
 | 0 | `#1a150f` | | 8 | `#564a3c` |
-| 1 | `#d1554a` | | 9 | `#e0705c` |
+| 1 | `#d55d4f` | | 9 | `#e0705c` |
 | 2 | `#8aa66b` | | 10 | `#9dbb7c` |
 | 3 | `#d8a657` | | 11 | `#e8bd6e` |
 | 4 | `#4fa8c5` | | 12 | `#6fc0d8` |
@@ -96,28 +96,40 @@ indistinguishable.
 
 ### Measured contrast
 
-Computed against `bg` `#1a150f` during design, not asserted by eye:
+Computed against `bg` `#1a150f` by the same formula `tests/contrast.lua`
+uses, not by hand. The margin column is headroom above that colour's
+threshold — it is the number to look at before nudging a hue.
 
-| colour | ratio |
-| --- | --- |
-| `fg_bright` | 15.67:1 |
-| `fg` | 12.50:1 |
-| `spice` | 8.41:1 |
-| `fg_dim` | 8.28:1 |
-| `num` | 7.07:1 |
-| `scrub` | 6.85:1 |
-| `ibad` | 6.84:1 |
-| `water` | 6.67:1 |
-| `melange` | 5.62:1 |
-| `subtle` | 4.87:1 |
-| `ember` | 4.62:1 |
-| `blood` | 4.52:1 |
-| `muted` | 3.27:1 |
-| `linenr` | 2.16:1 |
-| `border` | 1.56:1 |
+| colour | ratio | bar | margin |
+| --- | --- | --- | --- |
+| `fg_bright` | 15.48:1 | 7 | +8.48 |
+| `fg` | 12.21:1 | 7 | +5.21 |
+| `spice` | 8.21:1 | 4.5 | +3.71 |
+| `fg_dim` | 8.10:1 | 7 | +1.10 |
+| `num` | 6.91:1 | 4.5 | +2.41 |
+| `scrub` | 6.69:1 | 4.5 | +2.19 |
+| `ibad` | 6.68:1 | 4.5 | +2.18 |
+| `water` | 6.53:1 | 4.5 | +2.03 |
+| `melange` | 5.52:1 | 4.5 | +1.02 |
+| `subtle` | 4.79:1 | 4.5 | +0.29 |
+| `blood` | 4.76:1 | 4.5 | +0.26 |
+| `ember` | 4.52:1 | 4.5 | **+0.02** |
+| `muted` | 3.19:1 | 3 | +0.19 |
+| `linenr` | 2.11:1 | 2 | +0.11 |
+| `border` | 1.54:1 | 1.5 | +0.04 |
+
+**`ember` has essentially no headroom.** At +0.02 above its bar, any
+darkening of the keyword colour — or any lightening of `bg` — fails the
+contrast test. Treat 4.52 as the floor it is, not as room to move.
+
+An earlier revision of this table was computed by hand and overstated
+every ratio by roughly 1-2%, in the same direction. That is what hid the
+`blood` failure below, and why these numbers are now generated.
 
 `blood` began as `#c9453d`, which measured 3.89:1 and failed the accent
-threshold below. It was lightened to `#d1554a` at the same hue.
+threshold below. It was lightened at the same hue, first to `#d1554a` —
+which hand-arithmetic put at 4.52:1 but `tests/contrast.lua` measured at
+4.41:1, still failing — and then to `#d55d4f`, measured at 4.76:1.
 
 ## Architecture
 
@@ -289,7 +301,7 @@ against `bg`:
 Comments and chrome sit below the text bar by design — they are meant to
 recede — so they get their own lower thresholds rather than being
 exempted. `border` is decoration rather than information and gets the
-loosest bar of all; it measures 1.56:1.
+loosest bar of all; it measures 1.54:1.
 
 **3. Ghostty parity test.** Parse `extras/ghostty/arrakis`, extract its 16
 `palette =` entries plus `background` and `foreground`, and assert they

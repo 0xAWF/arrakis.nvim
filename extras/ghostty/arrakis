@@ -1,0 +1,38 @@
+# Arrakis — desert night
+#
+# Install:
+#   cp extras/ghostty/arrakis ~/.config/ghostty/themes/arrakis
+# then in ~/.config/ghostty/config:
+#   theme = arrakis
+#
+# Hand-maintained twin of lua/arrakis/palette.lua. tests/parity.lua fails
+# if the two drift.
+
+background = 1a150f
+foreground = e3d2b4
+
+cursor-color = d8a657
+cursor-text = 1a150f
+
+selection-background = 2e261b
+selection-foreground = e3d2b4
+
+# Bright-on-bold would promote a colour every time a program bolds text.
+bold-is-bright = false
+
+palette = 0=#1a150f
+palette = 1=#d55d4f
+palette = 2=#8aa66b
+palette = 3=#d8a657
+palette = 4=#4fa8c5
+palette = 5=#b07ea8
+palette = 6=#5fa89b
+palette = 7=#bcab92
+palette = 8=#564a3c
+palette = 9=#e0705c
+palette = 10=#9dbb7c
+palette = 11=#e8bd6e
+palette = 12=#6fc0d8
+palette = 13=#c795bd
+palette = 14=#7cc4b6
+palette = 15=#f7ecd6
