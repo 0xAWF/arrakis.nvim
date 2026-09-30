@@ -185,4 +185,4 @@ hand, so a change to one has to be made in the other.
 
 ## Licence
 
-MIT
+[MIT](LICENSE)
