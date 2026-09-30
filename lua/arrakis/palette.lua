@@ -1,5 +1,4 @@
 -- Arrakis — every hex in the project lives here, exactly once.
--- Contrast ratios against bg are asserted by tests/contrast.lua.
 local p = {
   -- Base ramp, darkest to lightest
   bg = "#1a150f",

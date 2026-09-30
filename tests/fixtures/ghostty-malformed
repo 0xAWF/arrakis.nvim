@@ -1,9 +1,0 @@
-# Fixture for tests/parity.lua: a Ghostty theme with one palette entry the
-# parser cannot read as a hex colour. Ghostty accepts named colours here,
-# so this is valid config, not corruption.
-background = 1a150f
-foreground = e3d2b4
-palette = 0=#1a150f
-palette = 5=purple
-palette = 6=#5fa89b
-palette = 15=#f7ecd6

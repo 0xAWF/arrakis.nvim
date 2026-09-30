@@ -66,8 +66,8 @@ require("arrakis").setup({
 
 The Lua palette and the Ghostty theme at
 [`extras/ghostty/arrakis`](extras/ghostty/arrakis) are maintained by hand.
-This table is the reference for reconciling them; `tests/parity.lua` fails
-if they drift.
+This table is the reference for keeping them in step — change a colour in
+one and it has to be changed in the other.
 
 | role | hex | | role | hex |
 | --- | --- | --- | --- | --- |
@@ -84,8 +84,8 @@ if they drift.
 | `fg_bright` functions | `#f7ecd6` | | | |
 
 Every foreground clears WCAG AA against the background; comments and
-chrome sit deliberately below it. The thresholds are asserted by
-`tests/contrast.lua`.
+chrome sit deliberately below it. `ember` has the least headroom, at
+4.52:1 against a 4.5 floor — it cannot be darkened.
 
 ## Plugins
 
@@ -103,19 +103,6 @@ fall back to unstyled `Normal`.
 [toggleterm.nvim]: https://github.com/akinsho/toggleterm.nvim
 [mini.nvim]: https://github.com/nvim-mini/mini.nvim
 [gitsigns.nvim]: https://github.com/lewis6991/gitsigns.nvim
-
-## Tests
-
-From the repository root:
-
-```sh
-nvim --headless -l tests/run.lua
-```
-
-No framework and no dependencies. Three things are checked: that the
-scheme loads and every group resolves, that every colour clears its
-contrast threshold, and that the Ghostty theme has not drifted from the
-Lua palette.
 
 ## Licence
 
