@@ -2,7 +2,7 @@ local palette = require("arrakis.palette")
 
 -- Merge order is fixed: later modules may refine earlier ones, and user
 -- overrides always land last.
-local modules = { "editor", "syntax", "diagnostics" }
+local modules = { "editor", "syntax", "diagnostics", "plugins" }
 
 local M = {}
 
