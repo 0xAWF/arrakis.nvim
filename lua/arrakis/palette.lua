@@ -1,4 +1,4 @@
--- Arrakis — every hex in the project lives here, exactly once.
+-- Arrakis: every hex in the project lives here, exactly once.
 local p = {
   -- Base ramp, darkest to lightest
   bg = "#1a150f",

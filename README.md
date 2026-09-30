@@ -85,8 +85,8 @@ require("arrakis").setup({ transparent = true })
 ```
 
 Backgrounds are dropped from `Normal`, `SignColumn`, `WinBar`, the tabline and
-every plugin float. Selection rows — `Visual`, `PmenuSel`, `TelescopeSelection`
-— keep theirs, or there would be nothing left to show the selection.
+every plugin float. Selection rows (`Visual`, `PmenuSel`, `TelescopeSelection`)
+keep theirs, or there would be nothing left to show the selection.
 
 #### Borderless floats
 
@@ -103,7 +103,7 @@ require("arrakis").setup({
 
 #### Brighter comments
 
-`muted` sits at 3.19:1 against the background, which is deliberate — comments
+`muted` sits at 3.19:1 against the background, which is deliberate: comments
 are meant to recede. If you want them louder, `subtle` is the next step up at
 4.79:1.
 
@@ -138,7 +138,7 @@ theme = arrakis
 ```
 
 The themes directory is `~/.config/ghostty/themes/` on every platform, but the
-config file itself is `~/.config/ghostty/config` only on Linux and BSD — on
+config file itself is `~/.config/ghostty/config` only on Linux and BSD. On
 macOS it is `~/Library/Application Support/com.mitchellh.ghostty/config`, and a
 `~/.config/ghostty/config` you create there is silently ignored.
 
@@ -177,7 +177,7 @@ configuration.
 | <img src="assets/circles/info_dim.svg" width="40">   | info_dim  | `#325861` | Info virtual text                                         |
 | <img src="assets/circles/hint_dim.svg" width="40">   | hint_dim  | `#4c5738` | Hint virtual text                                         |
 
-`ember` has the least headroom of any accent, at 4.52:1 against a 4.5 floor —
+`ember` has the least headroom of any accent, at 4.52:1 against a 4.5 floor, so
 it cannot be darkened. The Lua palette and the Ghostty theme are maintained by
 hand, so a change to one has to be made in the other.
 
