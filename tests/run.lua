@@ -14,7 +14,7 @@ function t.check(name, ok, detail)
   end
 end
 
-local specs = { "contrast", "load", "syntax", "diagnostics", "plugins" }
+local specs = { "contrast", "load", "syntax", "diagnostics", "plugins", "parity" }
 
 for _, name in ipairs(specs) do
   local path = "tests/" .. name .. ".lua"

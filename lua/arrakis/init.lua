@@ -27,6 +27,8 @@ function M.load()
   for group, spec in pairs(require("arrakis.highlights").build(M.options)) do
     vim.api.nvim_set_hl(0, group, spec)
   end
+
+  require("arrakis.groups.terminal")(require("arrakis.palette"))
 end
 
 return M
