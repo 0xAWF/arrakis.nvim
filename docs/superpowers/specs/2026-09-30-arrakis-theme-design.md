@@ -62,7 +62,7 @@ appears there exactly once.
 | `scrub` | `#8aa66b` | hints, git add |
 | `water` | `#5fa89b` | ANSI cyan |
 | `melange` | `#b07ea8` | ANSI magenta |
-| `blood` | `#d1554a` | errors |
+| `blood` | `#d55d4f` | errors |
 
 `ember` is editor-only; it has no ANSI slot, since ANSI has no orange.
 
@@ -72,7 +72,7 @@ Hardcoded, not blended at runtime. Each is 45% accent over `bg`.
 
 | name | hex |
 | --- | --- |
-| `err_dim` | `#6c3229` |
+| `err_dim` | `#6e352c` |
 | `warn_dim` | `#6f572f` |
 | `info_dim` | `#325861` |
 | `hint_dim` | `#4c5738` |
@@ -86,7 +86,7 @@ indistinguishable.
 | # | hex | | # | hex |
 | --- | --- | --- | --- | --- |
 | 0 | `#1a150f` | | 8 | `#564a3c` |
-| 1 | `#d1554a` | | 9 | `#e0705c` |
+| 1 | `#d55d4f` | | 9 | `#e0705c` |
 | 2 | `#8aa66b` | | 10 | `#9dbb7c` |
 | 3 | `#d8a657` | | 11 | `#e8bd6e` |
 | 4 | `#4fa8c5` | | 12 | `#6fc0d8` |
@@ -111,13 +111,15 @@ Computed against `bg` `#1a150f` during design, not asserted by eye:
 | `melange` | 5.62:1 |
 | `subtle` | 4.87:1 |
 | `ember` | 4.62:1 |
-| `blood` | 4.52:1 |
+| `blood` | 4.76:1 |
 | `muted` | 3.27:1 |
 | `linenr` | 2.16:1 |
 | `border` | 1.56:1 |
 
 `blood` began as `#c9453d`, which measured 3.89:1 and failed the accent
-threshold below. It was lightened to `#d1554a` at the same hue.
+threshold below. It was lightened at the same hue, first to `#d1554a` —
+which hand-arithmetic put at 4.52:1 but `tests/contrast.lua` measured at
+4.41:1, still failing — and then to `#d55d4f`, measured at 4.76:1.
 
 ## Architecture
 
