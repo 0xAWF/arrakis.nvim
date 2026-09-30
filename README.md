@@ -1,4 +1,4 @@
-# arrakis
+# arrakis.nvim
 
 A desert-night colourscheme for Neovim, with a matching Ghostty theme.
 
@@ -21,7 +21,7 @@ Neovim 0.10 or newer, and a terminal with truecolour support.
 With `vim.pack` (Neovim 0.12+):
 
 ```lua
-vim.pack.add({ { src = "https://github.com/0xAWF/nvim.arrakis" } })
+vim.pack.add({ { src = "https://github.com/0xAWF/arrakis.nvim" } })
 vim.cmd.colorscheme("arrakis")
 ```
 
@@ -29,7 +29,7 @@ With lazy.nvim:
 
 ```lua
 {
-  "0xAWF/nvim.arrakis",
+  "0xAWF/arrakis.nvim",
   priority = 1000,
   config = function()
     vim.cmd.colorscheme("arrakis")
