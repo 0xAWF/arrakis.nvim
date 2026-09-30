@@ -2,6 +2,8 @@
 
 A desert-night colourscheme for Neovim, with a matching Ghostty theme.
 
+![Neovim with the arrakis colourscheme: three overlapping windows showing a Lua buffer with diagnostics, the oil.nvim file browser, and a telescope picker](assets/nvim.png)
+
 Dark only. One rule governs every colour in it:
 
 > A token gets a hue only if the hue tells you something its name cannot.
