@@ -21,6 +21,9 @@ function M.load()
   end
 
   vim.o.termguicolors = true
+  -- Before colors_name is set: assigning `background` while g:colors_name
+  -- is set re-sources the colorscheme, which would recurse.
+  vim.o.background = "dark"
   -- Set after `highlight clear`, which wipes it.
   vim.g.colors_name = "arrakis"
 

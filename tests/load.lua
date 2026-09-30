@@ -36,6 +36,15 @@ return function(t)
   t.check("NormalFloat bg", hex(hl("NormalFloat").bg) == p.bg_float, tostring(hex(hl("NormalFloat").bg)))
   t.check("FloatBorder fg", hex(hl("FloatBorder").fg) == p.border, tostring(hex(hl("FloatBorder").fg)))
 
+  -- The spec writes chrome as "<fg> on <bg>" (IncSearch `bg` on `spice`,
+  -- StatusLine `fg_dim` on `bg_alt`). Search is `bg_sel` on `fg`: a bright
+  -- sand block with dark text. Reversed, its background is bg_sel — which
+  -- is also Visual, PmenuSel and TelescopeSelection — so every non-current
+  -- match becomes invisible and indistinguishable from a selection.
+  t.check("Search fg", hex(hl("Search").fg) == p.bg_sel, tostring(hex(hl("Search").fg)))
+  t.check("Search bg", hex(hl("Search").bg) == p.fg, tostring(hex(hl("Search").bg)))
+  t.check("Search bg differs from Visual bg", hex(hl("Search").bg) ~= hex(hl("Visual").bg), "Search is indistinguishable from Visual")
+
   -- No group may resolve to an empty definition.
   for _, group in ipairs({ "Normal", "CursorLine", "Pmenu", "StatusLine", "Folded", "NonText" }) do
     t.check("non-empty " .. group, next(hl(group)) ~= nil, "resolved empty")
@@ -43,6 +52,14 @@ return function(t)
 
   -- termguicolors is required for a truecolour theme to mean anything.
   t.check("termguicolors on", vim.o.termguicolors == true, "off")
+
+  -- Neovim 0.12 auto-detects `background` from the terminal via OSC 11, so
+  -- a user on a light terminal arrives here with background=light. Little
+  -- of our own highlighting reads it, but lualine's `auto` theme, several
+  -- mini.nvim modules and a number of runtime syntax scripts do.
+  vim.o.background = "light"
+  vim.cmd.colorscheme("arrakis")
+  t.check("forces background=dark", vim.o.background == "dark", tostring(vim.o.background))
 
   -- Review Focus 2: partial setup() must not drop other defaults, and a
   -- second call must not carry state over from the first.
@@ -59,6 +76,14 @@ return function(t)
   for _, group in ipairs({ "Normal", "SignColumn", "WinBar" }) do
     t.check("transparent " .. group, hl(group).bg == nil, "kept a background")
   end
+
+  -- TabLineFill is already transparent, so an opaque TabLine puts a solid
+  -- block next to a see-through gap in the same row — the seam transparency
+  -- exists to avoid. TabLineSel is a selection marker and keeps its
+  -- background, the same way Visual and PmenuSel do.
+  t.check("transparent TabLine", hl("TabLine").bg == nil, "kept a background")
+  t.check("transparent TabLineFill", hl("TabLineFill").bg == nil, "kept a background")
+  t.check("TabLineSel keeps its marker bg", hl("TabLineSel").bg ~= nil, "lost its background")
 
   -- Review Focus 4: an override naming a group the theme never sets must
   -- still be applied, not dropped.

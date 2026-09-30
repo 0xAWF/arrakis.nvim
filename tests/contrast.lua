@@ -67,6 +67,31 @@ return function(t)
     )
   end
 
+  -- The ANSI slots that are the same colour as a named field must stay
+  -- equal to it. Written as literals they drift silently: the parity test
+  -- only compares ansi to Ghostty, so a changed `blood` leaves terminal red
+  -- behind while parity still reports agreement.
+  local ansi_aliases = {
+    [0] = "bg",
+    [1] = "blood",
+    [2] = "scrub",
+    [3] = "spice",
+    [4] = "ibad",
+    [5] = "melange",
+    [6] = "water",
+    [7] = "fg_dim",
+    [8] = "linenr",
+    [15] = "fg_bright",
+  }
+
+  for index, name in pairs(ansi_aliases) do
+    t.check(
+      string.format("ansi[%d] tracks %s", index, name),
+      p.ansi[index] == p[name],
+      string.format("ansi[%d]=%s but %s=%s", index, tostring(p.ansi[index]), name, tostring(p[name]))
+    )
+  end
+
   for name, minimum in pairs(thresholds) do
     local got = ratio(p[name], p.bg)
     t.check(

@@ -1,6 +1,6 @@
 -- Arrakis — every hex in the project lives here, exactly once.
 -- Contrast ratios against bg are asserted by tests/contrast.lua.
-return {
+local p = {
   -- Base ramp, darkest to lightest
   bg = "#1a150f",
   bg_float = "#1e1812",
@@ -29,25 +29,29 @@ return {
   warn_dim = "#6f572f",
   info_dim = "#325861",
   hint_dim = "#4c5738",
-
-  -- Shared verbatim with extras/ghostty/arrakis. `ember` has no slot here;
-  -- ANSI has no orange.
-  ansi = {
-    [0] = "#1a150f",
-    [1] = "#d55d4f",
-    [2] = "#8aa66b",
-    [3] = "#d8a657",
-    [4] = "#4fa8c5",
-    [5] = "#b07ea8",
-    [6] = "#5fa89b",
-    [7] = "#bcab92",
-    [8] = "#564a3c",
-    [9] = "#e0705c",
-    [10] = "#9dbb7c",
-    [11] = "#e8bd6e",
-    [12] = "#6fc0d8",
-    [13] = "#c795bd",
-    [14] = "#7cc4b6",
-    [15] = "#f7ecd6",
-  },
 }
+
+-- Shared verbatim with extras/ghostty/arrakis. Slots that are the same
+-- colour as a named field reference it rather than repeating the hex, so
+-- the two cannot drift apart; only the bright variants (9-14), which have
+-- no named twin, are literals. `ember` has no slot here: ANSI has no orange.
+p.ansi = {
+  [0] = p.bg,
+  [1] = p.blood,
+  [2] = p.scrub,
+  [3] = p.spice,
+  [4] = p.ibad,
+  [5] = p.melange,
+  [6] = p.water,
+  [7] = p.fg_dim,
+  [8] = p.linenr,
+  [9] = "#e0705c",
+  [10] = "#9dbb7c",
+  [11] = "#e8bd6e",
+  [12] = "#6fc0d8",
+  [13] = "#c795bd",
+  [14] = "#7cc4b6",
+  [15] = p.fg_bright,
+}
+
+return p

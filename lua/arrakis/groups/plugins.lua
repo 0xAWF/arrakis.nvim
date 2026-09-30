@@ -1,4 +1,10 @@
-return function(p, _opts)
+return function(p, opts)
+  -- Plugin floats follow the theme's own NormalFloat: opaque normally,
+  -- transparent when the user asked for transparency. Selection rows keep
+  -- their background either way, the same as PmenuSel.
+  local bg_float = opts.transparent and "NONE" or p.bg_float
+  local bg_alt = opts.transparent and "NONE" or p.bg_alt
+
   return {
     -- oil.nvim
     OilDir = { fg = p.ibad },
@@ -25,19 +31,19 @@ return function(p, _opts)
     OilTypeLink = { fg = p.water },
 
     -- telescope.nvim
-    TelescopeNormal = { fg = p.fg, bg = p.bg_float },
-    TelescopeBorder = { fg = p.border, bg = p.bg_float },
+    TelescopeNormal = { fg = p.fg, bg = bg_float },
+    TelescopeBorder = { fg = p.border, bg = bg_float },
     TelescopeTitle = { fg = p.bg, bg = p.spice, bold = true },
-    TelescopePromptNormal = { fg = p.fg, bg = p.bg_alt },
-    TelescopePromptBorder = { fg = p.border, bg = p.bg_alt },
+    TelescopePromptNormal = { fg = p.fg, bg = bg_alt },
+    TelescopePromptBorder = { fg = p.border, bg = bg_alt },
     TelescopePromptTitle = { fg = p.bg, bg = p.ember, bold = true },
     TelescopePromptPrefix = { fg = p.spice },
     TelescopePromptCounter = { fg = p.muted },
-    TelescopeResultsNormal = { fg = p.fg_dim, bg = p.bg_float },
-    TelescopeResultsBorder = { fg = p.border, bg = p.bg_float },
-    TelescopeResultsTitle = { fg = p.bg_float, bg = p.bg_float },
-    TelescopePreviewNormal = { fg = p.fg, bg = p.bg_float },
-    TelescopePreviewBorder = { fg = p.border, bg = p.bg_float },
+    TelescopeResultsNormal = { fg = p.fg_dim, bg = bg_float },
+    TelescopeResultsBorder = { fg = p.border, bg = bg_float },
+    TelescopeResultsTitle = { fg = bg_float, bg = bg_float },
+    TelescopePreviewNormal = { fg = p.fg, bg = bg_float },
+    TelescopePreviewBorder = { fg = p.border, bg = bg_float },
     TelescopePreviewTitle = { fg = p.bg, bg = p.scrub, bold = true },
     TelescopeSelection = { fg = p.fg_bright, bg = p.bg_sel },
     TelescopeSelectionCaret = { fg = p.spice, bg = p.bg_sel },
@@ -45,11 +51,11 @@ return function(p, _opts)
     TelescopeMatching = { fg = p.spice, bold = true },
 
     -- blink.cmp
-    BlinkCmpMenu = { fg = p.fg_dim, bg = p.bg_float },
-    BlinkCmpMenuBorder = { fg = p.border, bg = p.bg_float },
+    BlinkCmpMenu = { fg = p.fg_dim, bg = bg_float },
+    BlinkCmpMenuBorder = { fg = p.border, bg = bg_float },
     BlinkCmpMenuSelection = { fg = p.fg_bright, bg = p.bg_sel },
     BlinkCmpScrollBarThumb = { bg = p.border },
-    BlinkCmpScrollBarGutter = { bg = p.bg_float },
+    BlinkCmpScrollBarGutter = { bg = bg_float },
     BlinkCmpLabel = { fg = p.fg_dim },
     BlinkCmpLabelDeprecated = { fg = p.muted, strikethrough = true },
     BlinkCmpLabelMatch = { fg = p.spice, bold = true },
@@ -58,16 +64,16 @@ return function(p, _opts)
     BlinkCmpKind = { fg = p.ibad },
     BlinkCmpSource = { fg = p.muted },
     BlinkCmpGhostText = { fg = p.linenr, italic = true },
-    BlinkCmpDoc = { fg = p.fg, bg = p.bg_float },
-    BlinkCmpDocBorder = { fg = p.border, bg = p.bg_float },
-    BlinkCmpDocSeparator = { fg = p.border, bg = p.bg_float },
-    BlinkCmpSignatureHelp = { fg = p.fg, bg = p.bg_float },
-    BlinkCmpSignatureHelpBorder = { fg = p.border, bg = p.bg_float },
+    BlinkCmpDoc = { fg = p.fg, bg = bg_float },
+    BlinkCmpDocBorder = { fg = p.border, bg = bg_float },
+    BlinkCmpDocSeparator = { fg = p.border, bg = bg_float },
+    BlinkCmpSignatureHelp = { fg = p.fg, bg = bg_float },
+    BlinkCmpSignatureHelpBorder = { fg = p.border, bg = bg_float },
     BlinkCmpSignatureHelpActiveParameter = { fg = p.spice, bold = true },
 
     -- trouble.nvim
-    TroubleNormal = { fg = p.fg_dim, bg = p.bg_float },
-    TroubleNormalNC = { fg = p.fg_dim, bg = p.bg_float },
+    TroubleNormal = { fg = p.fg_dim, bg = bg_float },
+    TroubleNormalNC = { fg = p.fg_dim, bg = bg_float },
     TroubleText = { fg = p.fg_dim },
     TroubleCount = { fg = p.spice, bg = p.bg_sel },
     TroubleIndent = { fg = p.border },
@@ -77,10 +83,10 @@ return function(p, _opts)
     TroubleCode = { fg = p.muted },
 
     -- toggleterm.nvim
-    ToggleTerm1FloatBorder = { fg = p.border, bg = p.bg_float },
-    ToggleTerm2FloatBorder = { fg = p.border, bg = p.bg_float },
-    ToggleTermNormal = { fg = p.fg, bg = p.bg_float },
-    ToggleTermNormalFloat = { fg = p.fg, bg = p.bg_float },
+    ToggleTerm1FloatBorder = { fg = p.border, bg = bg_float },
+    ToggleTerm2FloatBorder = { fg = p.border, bg = bg_float },
+    ToggleTermNormal = { fg = p.fg, bg = bg_float },
+    ToggleTermNormalFloat = { fg = p.fg, bg = bg_float },
 
     -- mini.nvim
     MiniStatuslineModeNormal = { fg = p.bg, bg = p.spice, bold = true },

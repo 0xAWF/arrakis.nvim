@@ -15,7 +15,9 @@ local function parse(path)
         conf.palette[tonumber(index)] = "#" .. colour:gsub("^#", ""):lower()
       else
         local key, value = stripped:match("^([%w%-]+)%s*=%s*(.+)$")
-        if key then
+        -- `palette` is never a scalar. Without this guard an unreadable
+        -- palette line lands here and replaces conf.palette with a string.
+        if key and key ~= "palette" then
           conf[key] = value:gsub("^#", ""):lower()
         end
       end
@@ -28,6 +30,22 @@ end
 
 return function(t)
   local p = require("arrakis.palette")
+
+  -- A `palette` line the hex pattern cannot read (Ghostty accepts named
+  -- colours, so this is valid config) must not be swallowed by the scalar
+  -- branch: that would overwrite conf.palette with a string, and the next
+  -- palette line would then index a string and abort the whole runner.
+  -- Only the unreadable index may go missing.
+  local ok, bad = pcall(parse, "tests/fixtures/ghostty-malformed")
+  t.check("malformed palette line does not throw", ok, tostring(bad))
+  if ok then
+    t.check("palette stays a table", type(bad.palette) == "table", type(bad.palette))
+    t.check("unreadable index is absent", bad.palette[5] == nil, tostring(bad.palette[5]))
+    t.check("readable index before it survives", bad.palette[0] == "#1a150f", tostring(bad.palette[0]))
+    t.check("readable index after it survives", bad.palette[6] == "#5fa89b", tostring(bad.palette[6]))
+    t.check("scalars still parse", bad.background == "1a150f", tostring(bad.background))
+  end
+
   local conf = parse(GHOSTTY)
 
   for i = 0, 15 do

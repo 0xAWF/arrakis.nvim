@@ -66,11 +66,20 @@ require("arrakis").setup({
 cp extras/ghostty/arrakis ~/.config/ghostty/themes/arrakis
 ```
 
-Then in `~/.config/ghostty/config`:
+Then add this to your Ghostty config:
 
 ```
 theme = arrakis
 ```
+
+The config file is `~/.config/ghostty/config` on Linux and BSD. **On macOS
+it is `~/Library/Application Support/com.mitchellh.ghostty/config`** — a
+`~/.config/ghostty/config` you create there is ignored, so editing it looks
+like the theme silently failing. The `themes/` directory above is read on
+both platforms.
+
+Reload with `⌘⇧,` (macOS) or `ctrl+shift+,`; Ghostty does not pick up a
+theme change in already-open windows without it.
 
 The terminal's ANSI 16 and Neovim's `terminal_color_*` come from the same
 values, so `:terminal` and a bare shell look identical.

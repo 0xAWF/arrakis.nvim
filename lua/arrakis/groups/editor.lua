@@ -27,7 +27,7 @@ return function(p, opts)
 
     Visual = { bg = p.bg_sel },
     VisualNOS = { bg = p.bg_sel },
-    Search = { fg = p.fg, bg = p.bg_sel },
+    Search = { fg = p.bg_sel, bg = p.fg },
     IncSearch = { fg = p.bg, bg = p.spice },
     CurSearch = { fg = p.bg, bg = p.spice },
     MatchParen = { fg = p.spice, underline = true },
@@ -40,7 +40,10 @@ return function(p, opts)
 
     StatusLine = { fg = p.fg_dim, bg = p.bg_alt },
     StatusLineNC = { fg = p.muted, bg = p.bg_alt },
-    TabLine = { fg = p.muted, bg = p.bg_alt },
+    -- TabLine follows TabLineFill: an opaque tab beside a transparent gap
+    -- in the same row is the seam this option exists to avoid. TabLineSel
+    -- is a selection marker and keeps its background, like Visual.
+    TabLine = { fg = p.muted, bg = opts.transparent and "NONE" or p.bg_alt },
     TabLineSel = { fg = p.fg_bright, bg = p.bg_sel },
     TabLineFill = { bg = bg },
     WinBar = { fg = p.fg_dim, bg = bg },
